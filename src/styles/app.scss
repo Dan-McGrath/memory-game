@@ -1,3 +1,36 @@
+body {
+    background-color: slategray;
+}
+
 h1 {
-    color: red
+    color: yellow;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.game {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1em;
+}
+
+.card {
+    border: 1px solid black;
+    text-align: center;
+    border-radius: 5px;
+    background-color: rgba(197, 197, 185, 0.5);
+}
+
+.score {
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+    min-width: 100px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 100px;
+    margin: 1em auto;
+    position: relative;
+    left: 25%;
 }

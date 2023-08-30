@@ -36,9 +36,12 @@ function App() {
 
   return (
     <>
-      <h1>Hello World</h1>
-      <p>High Score: {highScore}</p>
-      <p>Score: {currentScore}</p>
+      <h1>Memory Game</h1>
+      <div className="score">
+        <p>High Score: {highScore}</p>
+        <p>Score: {currentScore}</p>
+      </div>
+      
 
       <div className='game'>
         <GameBoard reset={reset} array={pokemonArray} scoreHandler={scoreHandler} endRound={endRound}/>
