@@ -4,7 +4,7 @@ export default function GameBoard({array, scoreHandler, endRound, reset}) {
 
     const shuffleCards = (arr) => {
         const newArray = arr.slice(0);
-        for(let i = 0; i < newArray.length; i++) {
+        for(let i = 0; i < newArray.length; i += 1) {
             const randInt = Math.floor(Math.random() * arr.length);
            [newArray[i], newArray[randInt]] = [newArray[randInt], newArray[i]];
         }
