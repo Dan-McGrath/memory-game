@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
-import Card from './card/Card.jsx'
-import Button from './button/Button.jsx';
-import Score from './score/Score.jsx';
+import GameBoard from './gameboard/GameBoard.jsx';
 import '../styles/app.scss'
 
 
 function App() {
-  const [pokemonArray, setPokemonArray] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-  const [startGame, setStartGame] = useState(false)
-  const [input, setInput] = useState('');
+  const [pokemonArray, setPokemonArray] = useState([]);
+  const [currentScore, setCurrentScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
+  const [reset, setReset] = useState(true)
 
     useEffect(() => {
       const getIndexes = () => {
@@ -22,39 +21,29 @@ function App() {
         getIndexes()
     }, [])
 
-    const startGameHandler = () => {
-      setStartGame(!startGame)
+    const endRound = () => {
+      if(currentScore > highScore) {
+        setHighScore(currentScore)
+      }
+      setCurrentScore(0)
+      setReset(true)
     }
 
-    const resetGameHandler = () => {
-      setStartGame(!startGame)
+    const scoreHandler = () => {
+      setCurrentScore(() => currentScore + 1);
+      setReset(false)
     }
-
-    const inputHandler = (e) => {
-      setInput(e.currentTarget.dataset.name);
-    }
-
-  const arrayItems = pokemonArray.map((ele) => <Card handler={inputHandler} key={ele} index={ele}/>)
 
   return (
-    !startGame ?
     <>
       <h1>Hello World</h1>
-      <div className='game'>
-        {arrayItems}
-      </div>
-      <Button text='Start Game' handler={startGameHandler}/>
-    </> :
+      <p>High Score: {highScore}</p>
+      <p>Score: {currentScore}</p>
 
-    <>
-      <div className='score'>
-        <Score input={input}/>
-      </div>
       <div className='game'>
-        {arrayItems}
+        <GameBoard reset={reset} array={pokemonArray} scoreHandler={scoreHandler} endRound={endRound}/>
       </div>
-      <Button text='Reset Game' handler={resetGameHandler}/>
-    </>
+    </> 
   )
 }
 

@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 
-export default function Card({index, handler}) {
+export default function Card({index, scoreHandler, endRound, reset}) {
     const [pokemonImg, setPokemonImg] = useState('');
     const [pokemonName, setPokemonName] = useState('');
+    const [isSelected, setIsSelected] = useState(false)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -15,8 +16,26 @@ export default function Card({index, handler}) {
         };
         fetchData()
     }, [index]);
+
+    useEffect(() => {
+		if (reset) {
+			setIsSelected(false);
+		}
+	}, [reset]);
+
+    const clickHandler = () => {
+        setIsSelected(!isSelected);
+        if(isSelected) {
+            endRound()
+        } else {
+            scoreHandler()
+        }
+        
+    }
+
+
     return (
-        <div className="card" onClick={handler} data-name={pokemonName}>
+        <div className="card" onClick={clickHandler} data-name={pokemonName}>
             <img src={pokemonImg} alt={pokemonName}/>
             <p>{pokemonName}</p>
         </div>
