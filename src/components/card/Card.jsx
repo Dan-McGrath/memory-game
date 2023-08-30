@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function Card({index}) {
+export default function Card({index, handler}) {
     const [pokemonImg, setPokemonImg] = useState('');
     const [pokemonName, setPokemonName] = useState('');
 
@@ -16,8 +16,8 @@ export default function Card({index}) {
         fetchData()
     }, [index]);
     return (
-        <div className="card">
-            <img src={pokemonImg} alt={pokemonName} />
+        <div className="card" onClick={handler} data-name={pokemonName}>
+            <img src={pokemonImg} alt={pokemonName}/>
             <p>{pokemonName}</p>
         </div>
     )
